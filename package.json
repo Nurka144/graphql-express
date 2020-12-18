@@ -1,0 +1,27 @@
+{
+  "name": "graphql-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuzelbekovnurbek-developer/graphql-express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuzelbekovnurbek-developer/graphql-express/issues"
+  },
+  "homepage": "https://github.com/tuzelbekovnurbek-developer/graphql-express#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.4.0"
+  }
+}
