@@ -1,61 +1,40 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
 const { graphqlHTTP } = require('express-graphql');
-const { graphql, buildSchema } = require('graphql');
+
+const graphQlSchema = require('./graphql/schema/index');
+const graphQlResolvers = require('./graphql/resolvers/index'); 
  
-const schema = buildSchema(`
-  type Query {
-    todo_title: String,
-    findOne(id: Int!): findOne,
-    findAll: [findAll],
-    createOne(title: String!): createOne
-  }
-
-  type findOne {
-      id: Int,
-      title: String
-  }
-
-  type findAll {
-      id: Int,
-      title: String
-  }
-
-  type createOne {
-      id: Int
-      title: String
-  }
-`);
- 
-let todos = [{
-    id: 1,
-    title: 'Learn Graphql'
-}, {
-    id: 2,
-    title: 'Earn money'
-}];
-
-const root = { 
-    todo_title: () => 'Hello world!',
-    findOne: ({id}) => {
-        return todos.find(item => item.id == id);
-    },
-    findAll: () => todos,
-    createOne: ({title}) => {
-        let index = todos.length + 1
-        todos.push({id: index, title})
-        return title
-    }      
-};
-
 const app = express();
 
 app.use(
   '/graphql',
   graphqlHTTP({
-    schema,
-    rootValue: root,
+    schema: graphQlSchema,
+    rootValue: graphQlResolvers,
     graphiql: true,
   }),
 );
 
-app.listen(4000);
+const runServer = async () => {
+    try {
+        await mongoose.connect("mongodb://localhost:27017/todo-graphql", {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useFindAndModify: true,
+            useUnifiedTopology: true
+        })
+        .then(() => console.log('MongoDB connected'))
+        .catch((error) => { throw 'Error MongoDB conect' })
+        app.listen(4000, () => {
+            console.log('App is running at http://localhost:%d', 4000)
+            console.log('Press CTRL-C to stop\n')
+        })
+    } catch (error) {
+        console.log('MongoDB connection error. Please make sure MongoDB is running => %d', error)
+        process.exit(1)
+    }
+}
+
+runServer();
