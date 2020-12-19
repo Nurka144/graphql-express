@@ -2,7 +2,7 @@ const Todos = require('../../models/todo');
 const log = require('../../config/winston');
 
 module.exports = {
-    title: () => 'test mongoose',
+    title: () => 'GraphQl Express',
     findAll: async () => { 
         try {
             const findTodos = await Todos.find();
@@ -12,7 +12,16 @@ module.exports = {
         }
     },
     createTodo: async args => {
-        const todo = args.todoData
-        console.log(todo)
+        try {
+            const {title, complete} = args.todoData
+            const todo = new Todos({
+                title,
+                complete
+            });
+            const newTodo = await todo.save();
+            return {_id: newTodo._id}
+        } catch (error) {
+            log.error(error);
+        }
     }
 }
