@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const { graphqlHTTP } = require('express-graphql');
 
 const graphQlSchema = require('./graphql/schema/index');
-const graphQlResolvers = require('./graphql/resolvers/index'); 
+const graphQlResolvers = require('./graphql/resolvers/index');
+const log = require('./config/winston'); 
  
 const app = express();
 
@@ -25,14 +26,14 @@ const runServer = async () => {
             useFindAndModify: true,
             useUnifiedTopology: true
         })
-        .then(() => console.log('MongoDB connected'))
+        .then(() => log.info('MongoDB connected'))
         .catch((error) => { throw 'Error MongoDB conect' })
         app.listen(4000, () => {
-            console.log('App is running at http://localhost:%d', 4000)
-            console.log('Press CTRL-C to stop\n')
+            log.info('App is running at http://localhost:4000')
+            log.info('Press CTRL-C to stop')
         })
     } catch (error) {
-        console.log('MongoDB connection error. Please make sure MongoDB is running => %d', error)
+        log.info('MongoDB connection error. Please make sure MongoDB is running => %d', error)
         process.exit(1)
     }
 }
