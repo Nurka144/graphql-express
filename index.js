@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const { graphqlHTTP } = require('express-graphql');
 
@@ -8,6 +11,13 @@ const graphQlResolvers = require('./graphql/resolvers/index');
 const log = require('./config/winston'); 
  
 const app = express();
+
+app.use(cors({
+    exposedHeaders: ['Content-Disposition']
+}));
+app.use(morgan('combined', { stream: log.stream }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(
   '/graphql',

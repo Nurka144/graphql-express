@@ -6,4 +6,4 @@ const todoSchema = new mongoose.Schema({
     date_by: {type: Date, default: Date.now()}
 });
 
-module.exports = new mongoose.model('todoSchema', todoSchema);
+module.exports = new mongoose.model('todos', todoSchema);
