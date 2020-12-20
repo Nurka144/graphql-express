@@ -18,12 +18,7 @@ module.exports = buildSchema(`
         complete: Int
     }
 
-    input TodoInput {
-        title: String,
-        complete: Int
-    }
-
     type Mutation {
-        createTodo(todoData: TodoInput): Todo
+        createTodo(title: String!, complete: Int!): Todo
     }
 `);

@@ -13,7 +13,7 @@ module.exports = {
     },
     createTodo: async args => {
         try {
-            const {title, complete} = args.todoData
+            const {title, complete} = args
             const todo = new Todos({
                 title,
                 complete
