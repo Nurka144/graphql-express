@@ -30,7 +30,7 @@ app.use(
 
 const runServer = async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/todo-graphql", {
+        await mongoose.connect("mongodb://localhost:27017/graphql-project", {
             useNewUrlParser: true,
             useCreateIndex: true,
             useFindAndModify: true,

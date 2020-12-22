@@ -9,16 +9,18 @@ module.exports = buildSchema(`
 
     type Query {
         title: String
-        findAll: [Todo] 
     }
 
-    type Todo {
+    type User {
         _id: ID,
-        title: String,
-        complete: Int
+        login: String,
+        password: String,
+        token: String,
+        create_by: String,
+        update_by: String
     }
 
     type Mutation {
-        createTodo(title: String!, complete: Int!): Todo
+        createUser(login: String, password: String): User
     }
 `);

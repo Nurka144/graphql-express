@@ -1,7 +1,0 @@
-query findAll {
-    findAll {
-        _id
-        title
-        complete
-    }
-}
