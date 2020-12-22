@@ -1,16 +1,5 @@
 <template>
-  <div class="home">
-    <router-link to="/blog">blog</router-link>
-    <router-view></router-view>
-    <img alt="Vue logo" src="../assets/logo.png">
+  <div class="about">
+    <h1>This is an home page</h1>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-
-
-export default {
-  name: 'Home',
-}
-</script>

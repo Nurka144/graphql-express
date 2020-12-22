@@ -12,9 +12,25 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
-    component: () => import('../views/Home.vue'),
+    name: 'Dashbord',
+    component: () => import('../views/Dashbord.vue'),
     children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: {
+          render(c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '',
+            name: '',
+            component: () => import('../views/Home.vue')
+          }
+        ]
+      },
       {
         path: 'blog',
         name: 'About',
