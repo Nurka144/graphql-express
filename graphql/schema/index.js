@@ -7,11 +7,6 @@ module.exports = buildSchema(`
         mutation: Mutation
     }
 
-    type Query {
-        login(login: String, password: String): User
-        
-    }
-
     type User {
         _id: ID,
         login: String,
@@ -19,6 +14,10 @@ module.exports = buildSchema(`
         token: String,
         create_by: String,
         update_by: String
+    }
+
+    type Query {
+        login(login: String, password: String): User
     }
 
     type Mutation {

@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(
-  '/graphql', (req, res) => {
+  '/graphql', 
     graphqlHTTP({
         schema: graphQlSchema,
         rootValue: graphQlResolvers,
@@ -29,10 +29,9 @@ app.use(
             message: error.message,
             locations: error.locations,
             stack: error.stack ? error.stack.split('\n') : [],
-            errCode: 500,
           })
-      })(req, res)
-  });
+      })
+  );
 
 const runServer = async () => {
     try {
