@@ -13,12 +13,25 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/Home.vue')
-  },
-  {
-    path: '/blog',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Blog.vue')
+    component: () => import('../views/Home.vue'),
+    children: [
+      {
+        path: 'blog',
+        name: 'About',
+        component: {
+          render(c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '',
+            name: '',
+            component: () => import('../views/Blog.vue')
+          }
+        ]
+      }   
+    ]
   }
 ]
 
