@@ -37,7 +37,7 @@ module.exports.login = async function login(bind) {
         }
         const token = await jwt.sign({data: login}, 'secretlogin', {expiresIn: '1h'});
         await User.updateOne({_id: findUser._id}, {$set: {credentials: token}});
-        return token;
+        return {token: token};
     } catch (error) {
         log.error(error);
         throw new Error(error);

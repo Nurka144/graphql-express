@@ -1,4 +1,4 @@
-query login($login: String, $password: String) {
+mutation login($login: String, $password: String) {
     login(login: $login, password: $password) {
         token
     }

@@ -14,7 +14,7 @@
                         </b-form-group>
 
                         <div style="display: flex; justify-content: space-around;">
-                            <b-button @click="onLoginascac" variant="primary">Войти</b-button>
+                            <b-button @click="onLogin" variant="primary">Войти</b-button>
                             <b-button @click="onRegister" variant="danger">Регистрация</b-button>
                         </div>
                     </b-form>
@@ -35,9 +35,9 @@
             }
         },
         methods: {
-            onLoginascac() {
-                 this.$apollo.query({
-                    query: require('../graphql/user/loginUser.gql'),
+            onLogin() {
+                 this.$apollo.mutate({
+                    mutation: require('../graphql/user/loginUser.gql'),
                     variables: {login: this.form.login, password: this.form.password}
                 })
                 .then(data => {

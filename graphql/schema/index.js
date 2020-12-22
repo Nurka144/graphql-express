@@ -17,10 +17,11 @@ module.exports = buildSchema(`
     }
 
     type Query {
-        login(login: String, password: String): User
+        title: String
     }
 
     type Mutation {
-        createUser(login: String, password: String): User
+        createUser(login: String, password: String): User,
+        login(login: String, password: String): User
     }
 `);
