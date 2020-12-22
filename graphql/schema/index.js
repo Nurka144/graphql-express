@@ -9,6 +9,7 @@ module.exports = buildSchema(`
 
     type Query {
         login(login: String, password: String): User
+        
     }
 
     type User {

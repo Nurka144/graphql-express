@@ -5,16 +5,10 @@ const bcrypt = require('bcryptjs');
 
 module.exports.create = async function create(bind) {
     try {
-        const {login, password} = bind;
-        const hashPassword = await bcrypt.hash(password, 10);
-        const user = new User({
-            login,
-            password: hashPassword
-        })
-        const newUser = await user.save();
-        return newUser
+        throw "acasc"
     } catch (error) {
         log.error(error);
+        throw new Error(error)
     }
 }
 
