@@ -1,5 +1,5 @@
 query login($login: String, $password: String) {
     login(login: $login, password: $password) {
-        _id
+        token
     }
 }
