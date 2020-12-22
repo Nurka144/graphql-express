@@ -3,7 +3,7 @@
         <b-container>
             <b-row>
                 <div style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%;">
-                    <b-form @submit="onSubmit" @reset="onReset">
+                    <b-form >
                         <b-form-group id="input-group-1" label="Login:" label-for="input-1">
                             <b-form-input id="input-1" v-model="form.login" type="text" placeholder="Enter login" required>
                             </b-form-input>
@@ -14,8 +14,8 @@
                         </b-form-group>
 
                         <div style="display: flex; justify-content: space-around;">
-                            <b-button type="submit" variant="primary">Войти</b-button>
-                            <b-button type="reset" variant="danger">Регистрация</b-button>
+                            <b-button @click="onLogin" variant="primary">Войти</b-button>
+                            <b-button @click="onRegister" variant="danger">Регистрация</b-button>
                         </div>
                     </b-form>
                 </div>
@@ -35,21 +35,25 @@
             }
         },
         methods: {
-            onSubmit(event) {
+            onLogin(event) {
                 event.preventDefault()
-                 this.$apollo.mutate({
-                    mutation: require('../graphql/createUser.gql'),
+                 this.$apollo.query({
+                    query: require('../graphql/user/loginUser.gql'),
                     variables: {login: this.form.login, password: this.form.password},
                     update: (cache, data) => {
                         console.log(data)
                     }
                 })
             },
-            onReset(event) {
+            onRegister(event) {
                 event.preventDefault()
-                // Reset our form values
-                this.form.email = ''
-                this.form.password = ''
+                this.$apollo.mutate({
+                    mutation: require('../graphql/user/createUser.gql'),
+                    variables: {login: this.form.login, password: this.form.password},
+                    update: (cache, data) => {
+                        console.log(data)
+                    }
+                })
                 
             }
         }

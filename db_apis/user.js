@@ -20,7 +20,7 @@ module.exports.create = async function create(bind) {
 
 module.exports.login = async function login(bind) {
     try {
-        
+        console.log(bind)
     } catch (error) {
         log.error(error);
     }

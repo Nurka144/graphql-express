@@ -8,7 +8,7 @@ module.exports = buildSchema(`
     }
 
     type Query {
-        title: String
+        login(login: String, password: String): User
     }
 
     type User {
