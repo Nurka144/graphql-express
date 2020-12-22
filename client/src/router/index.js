@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.name == 'Home' && true) next({path: '/login'})
+  if(to.name !== 'Auth' && !store.state.userInfo.isAuthenticated) next({path: '/login'})
   else next()
 })
 

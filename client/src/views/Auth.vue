@@ -41,7 +41,12 @@
                     variables: {login: this.form.login, password: this.form.password}
                 })
                 .then(data => {
-                    console.log(data)
+                    let dataLogin = {
+                        login: this.form.login,
+                        token: data.data.login.token
+                    }
+                    this.$store.commit('login', dataLogin)
+                    this.$router.push({ path: '/' });
                 })
                 .catch(error => {
                     alert(error.message)
