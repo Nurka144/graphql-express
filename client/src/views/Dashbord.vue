@@ -32,7 +32,7 @@
                 <em>User</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+              <b-dropdown-item href="#" @click.prevent="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -48,5 +48,11 @@
 
   export default {
     name: 'Dashbord',
+    methods: {
+      logout() {
+        this.$store.commit('logout');
+        this.$router.push({ path: '/login' });
+      }
+    },
   }
 </script>

@@ -18,6 +18,11 @@ const mutations = {
         state.userInfo.login = data.login
         state.userInfo.credentials = data.token
         state.userInfo.isAuthenticated = true
+    },
+    logout(state) {
+        state.userInfo.login = ""
+        state.userInfo.credentials = ""
+        state.userInfo.isAuthenticated = false
     }
 }
 
