@@ -35,7 +35,7 @@ module.exports.login = async function login(bind) {
         if (!checkPassword) {
             throw 'Некорректные данные'
         }
-        const token = await jwt.sign({data: login}, 'secretlogin', {expiresIn: '1h'});
+        const token = await jwt.sign({data: findUser}, 'secretlogin', {expiresIn: '1h'});
         await User.updateOne({_id: findUser._id}, {$set: {credentials: token}});
         return {token: token};
     } catch (error) {

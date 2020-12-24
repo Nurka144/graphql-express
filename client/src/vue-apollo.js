@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueApollo from 'vue-apollo'
 import { createApolloClient, restartWebsockets } from 'vue-cli-plugin-apollo/graphql-client'
+import { setContext } from 'apollo-link-context'
+import store from './store'
 
 // Install the vue plugin
 Vue.use(VueApollo)
@@ -21,7 +23,7 @@ const defaultOptions = {
   httpEndpoint,
   // You can use `wss` for secure connection (recommended in production)
   // Use `null` to disable subscriptions
-  wsEndpoint: process.env.VUE_APP_GRAPHQL_WS || 'ws://localhost:4000/graphql',
+  wsEndpoint: null,
   // LocalStorage token
   tokenName: AUTH_TOKEN,
   // Enable Automatic Query persisting with Apollo Engine
@@ -50,12 +52,24 @@ const defaultOptions = {
   // clientState: { resolvers: { ... }, defaults: { ... } }
 }
 
+const authLink = setContext(async (_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = store.state.userInfo.isAuthenticated ? store.state.userInfo.credentials : ''
+  return {
+    headers: {
+      ...headers,
+      Authorization: token
+    }
+  }
+})
+
 // Call this in the Vue app file
 export function createProvider (options = {}) {
   // Create apollo client
   const { apolloClient, wsClient } = createApolloClient({
     ...defaultOptions,
     ...options,
+    link: authLink
   })
   apolloClient.wsClient = wsClient
 
